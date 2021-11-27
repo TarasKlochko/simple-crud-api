@@ -3,13 +3,19 @@ const { getPostData } = require('../utils');
 const { version: uuidVersion } = require('uuid');
 const { validate: uuidValidate } = require('uuid');
 
+function handleServerError(res, error) {
+  console.log(error);
+  res.writeHead(500, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ message: 'Something went wrong' }));
+}
+
 async function getPersons(req, res) {
   try {
-    const persons = await Persons.findAll();
+    // const persons = await Persons.findAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(persons));
   } catch (error) {
-    console.log(error);
+    handleServerError(res, error);
   }
 }
 
@@ -30,7 +36,7 @@ async function getPerson(req, res, id) {
       res.end(JSON.stringify({ message: ' This code is not valid ' }));
     }
   } catch (error) {
-    console.log(error);
+    handleServerError(res, error);
   }
 }
 
@@ -48,7 +54,7 @@ async function createPerson(req, res, id) {
       return res.end(JSON.stringify({ message: 'Person must contain name, age and hobbies' }));
     }
   } catch (error) {
-    console.log(error);
+    handleServerError(res, error);
   }
 }
 
@@ -71,7 +77,7 @@ async function updatePerson(req, res, id) {
       res.end(JSON.stringify({ message: ' This code is not valid ' }));
     }
   } catch (error) {
-    console.log(error);
+    handleServerError(res, error);
   }
 }
 
@@ -93,7 +99,7 @@ async function deletePerson(req, res, id) {
       res.end(JSON.stringify({ message: ' This code is not valid ' }));
     }
   } catch (error) {
-    console.log(error);
+    handleServerError(res, error);
   }
 }
 
