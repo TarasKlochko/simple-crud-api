@@ -12,10 +12,10 @@ const server = http.createServer((req, res) => {
     getPerson(req, res, id);
   } else if (req.url === '/persons' && req.method === 'POST') {
     createPerson(req, res);
-  } else if (req.url.match(/\/persons\/([0-9]+)/) && req.method === 'PUT') {
+  } else if (req.url.match(PATH) && req.method === 'PUT') {
     const id = req.url.split('/')[2];
     updatePerson(req, res, id);
-  } else if (req.url.match(/\/persons\/([0-9]+)/) && req.method === 'DELETE') {
+  } else if (req.url.match(PATH) && req.method === 'DELETE') {
     const id = req.url.split('/')[2];
     deletePerson(req, res, id);
   } else {
