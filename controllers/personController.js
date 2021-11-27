@@ -77,14 +77,20 @@ async function updatePerson(req, res, id) {
 
 async function deletePerson(req, res, id) {
   try {
-    const person = await Persons.findById(id);
-    if (person) {
-      await Persons.remove(id);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ mesaga: `Product ${id} removed` }));
+    const isUuidV4Valid = uuidValidate(id) && uuidVersion(id) === 4;
+    if (isUuidV4Valid) {
+      const person = await Persons.findById(id);
+      if (person) {
+        await Persons.remove(id);
+        res.writeHead(204, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ messaga: `Person ${id} removed` }));
+      } else {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Person not found' }));
+      }
     } else {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: 'Person not found' }));
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ message: ' This code is not valid ' }));
     }
   } catch (error) {
     console.log(error);
