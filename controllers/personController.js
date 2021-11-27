@@ -37,9 +37,16 @@ async function getPerson(req, res, id) {
 async function createPerson(req, res, id) {
   try {
     const body = await getPostData(req);
-    const newPerson = await Persons.create(JSON.parse(body));
-    res.writeHead(201, { 'Content-Type': 'aplication/json' });
-    return res.end(JSON.stringify(newPerson));
+    const person = JSON.parse(body);
+    let isValidPerson = 'name' in person && 'age' in person && 'hobbies' in person;
+    if (isValidPerson) {
+      const newPerson = await Persons.create(JSON.parse(body));
+      res.writeHead(201, { 'Content-Type': 'aplication/json' });
+      return res.end(JSON.stringify(newPerson));
+    } else {
+      res.writeHead(400, { 'Content-Type': 'aplication/json' });
+      return res.end(JSON.stringify({ message: 'Person must contain name, age and hobbies' }));
+    }
   } catch (error) {
     console.log(error);
   }
