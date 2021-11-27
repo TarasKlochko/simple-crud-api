@@ -11,7 +11,7 @@ function handleServerError(res, error) {
 
 async function getPersons(req, res) {
   try {
-    // const persons = await Persons.findAll();
+    const persons = await Persons.findAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(persons));
   } catch (error) {
