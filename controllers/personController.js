@@ -47,10 +47,10 @@ async function createPerson(req, res, id) {
     let isValidPerson = 'name' in person && 'age' in person && 'hobbies' in person;
     if (isValidPerson) {
       const newPerson = await Persons.create(JSON.parse(body));
-      res.writeHead(201, { 'Content-Type': 'aplication/json' });
+      res.writeHead(201, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify(newPerson));
     } else {
-      res.writeHead(400, { 'Content-Type': 'aplication/json' });
+      res.writeHead(400, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ message: 'Person must contain name, age and hobbies' }));
     }
   } catch (error) {
@@ -66,7 +66,7 @@ async function updatePerson(req, res, id) {
       if (person) {
         const body = await getPostData(req);
         const updatePerson = await Persons.update(id, JSON.parse(body));
-        res.writeHead(200, { 'Content-Type': 'aplication/json' });
+        res.writeHead(200, { 'Content-Type': 'application/json' });
         return res.end(JSON.stringify(updatePerson));
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -89,7 +89,8 @@ async function deletePerson(req, res, id) {
       if (person) {
         await Persons.remove(id);
         res.writeHead(204, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ messaga: `Person ${id} removed` }));
+        // res.end(JSON.stringify({ message: `Person ${id} removed` }));
+        res.end(JSON.stringify());
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Person not found' }));
