@@ -9,7 +9,6 @@ const server = http.createServer((req, res) => {
     getPersons(req, res);
   } else if (req.url.match(PATH) && req.method === 'GET') {
     const id = req.url.split('/')[2];
-    console.log(id);
     getPerson(req, res, id);
   } else if (req.url === '/persons' && req.method === 'POST') {
     createPerson(req, res);
@@ -26,7 +25,6 @@ const server = http.createServer((req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-console.log('process.env.PORT', process.env.PORT);
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 module.exports = server;

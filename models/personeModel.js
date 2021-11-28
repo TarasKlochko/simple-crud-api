@@ -10,9 +10,7 @@ function findAll() {
 
 function findById(id) {
   return new Promise((resolve, reject) => {
-    console.log('id', id);
     const person = persons.find((p) => p.id == id);
-    console.log(person);
     resolve(person);
   });
 }

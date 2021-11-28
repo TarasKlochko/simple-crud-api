@@ -89,7 +89,6 @@ async function deletePerson(req, res, id) {
       if (person) {
         await Persons.remove(id);
         res.writeHead(204, { 'Content-Type': 'application/json' });
-        // res.end(JSON.stringify({ message: `Person ${id} removed` }));
         res.end(JSON.stringify());
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
