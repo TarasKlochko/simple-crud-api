@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "start:dev": "nodemon server.js",
-    "start:prod": "webpack && node server.js",
+    "start:prod": "webpack && node ./build/server.bundle.js",
     "test": "jest"
   },
   "repository": {
