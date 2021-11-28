@@ -68,8 +68,30 @@ describe('Test CRUD', () => {
 
     await request(server).delete(`/persons/${response.body.id}`).expect(204);
     await request(server).get(`/persons/${response.body.id}`).expect(404, { message: 'Person not found' });
+  });
+});
 
-    // expect(response.body['id']).toBe('Tesettttt');
-    // expect(response.statusCode).toBe(200);
+describe('Test all message', () => {
+  test('should display all message', async () => {
+    await request(server).get(`/people`).expect({ message: 'Route not found' });
+    await request(server).get(`/persons/${nonExistentID}`).expect({ message: 'Person not found' });
+    await request(server).get(`/persons/${invalidID}`).expect({ message: 'This code is not valid' });
+
+    await request(server)
+      .post('/persons')
+      .send(newPersonInvalid)
+      .expect({ message: 'Person must contain name, age and hobbies' });
+
+    await request(server).put(`/persons/${nonExistentID}`).send(updatePerson).expect({ message: 'Person not found' });
+    await request(server).put(`/persons/${invalidID}`).send(updatePerson).expect({ message: 'This code is not valid' });
+
+    await request(server)
+      .delete(`/persons/${nonExistentID}`)
+      .send(updatePerson)
+      .expect({ message: 'Person not found' });
+    await request(server)
+      .delete(`/persons/${invalidID}`)
+      .send(updatePerson)
+      .expect({ message: 'This code is not valid' });
   });
 });

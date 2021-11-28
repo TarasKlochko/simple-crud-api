@@ -33,7 +33,7 @@ async function getPerson(req, res, id) {
       }
     } else {
       res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: ' This code is not valid ' }));
+      res.end(JSON.stringify({ message: 'This code is not valid' }));
     }
   } catch (error) {
     handleServerError(res, error);
@@ -74,7 +74,7 @@ async function updatePerson(req, res, id) {
       }
     } else {
       res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: ' This code is not valid ' }));
+      res.end(JSON.stringify({ message: 'This code is not valid' }));
     }
   } catch (error) {
     handleServerError(res, error);
@@ -97,7 +97,7 @@ async function deletePerson(req, res, id) {
       }
     } else {
       res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: ' This code is not valid ' }));
+      res.end(JSON.stringify({ message: 'This code is not valid' }));
     }
   } catch (error) {
     handleServerError(res, error);
