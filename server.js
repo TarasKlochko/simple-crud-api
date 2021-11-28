@@ -3,14 +3,14 @@ const http = require('http');
 const { getPersons, getPerson, createPerson, updatePerson, deletePerson } = require('./controllers/personController');
 
 const server = http.createServer((req, res) => {
-  const PATH = new RegExp(/\/persons\/[a-zA-Z0-9]/);
+  const PATH = new RegExp(/\/person\/[a-zA-Z0-9]/);
 
-  if (req.url === '/persons' && req.method === 'GET') {
+  if (req.url === '/person' && req.method === 'GET') {
     getPersons(req, res);
   } else if (req.url.match(PATH) && req.method === 'GET') {
     const id = req.url.split('/')[2];
     getPerson(req, res, id);
-  } else if (req.url === '/persons' && req.method === 'POST') {
+  } else if (req.url === '/person' && req.method === 'POST') {
     createPerson(req, res);
   } else if (req.url.match(PATH) && req.method === 'PUT') {
     const id = req.url.split('/')[2];
